@@ -1,14 +1,10 @@
 import torch
 import torch.nn as nn
 from torch import optim
-from torch.utils.data import DataLoader, Dataset
-from PIL import Image
-import numpy as np
+from torch.utils.data import DataLoader
 import torchvision
 from torchvision.transforms import v2
 
-import os
-import sys; sys.path.append(os.getcwd())
 from model.vit import VisionTransformer
 
 NORMALIZE_MEAN: list[float] = [0.5, 0.5, 0.5]
@@ -114,10 +110,8 @@ if __name__ == "__main__":
     dropout = 0.1
 
     train_transform = v2.Compose([
-        v2.RandomRotation(degrees=30),
         v2.Resize(size=img_sizes, antialias=True),
-        v2.RandomHorizontalFlip(p=0.5),
-        v2.RandomVerticalFlip(p=0.5),
+        v2.AutoAugment(torchvision.transforms.AutoAugmentPolicy.CIFAR10),
         v2.ToImage(),
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(mean=NORMALIZE_MEAN, std=NORMALIZE_STD),
