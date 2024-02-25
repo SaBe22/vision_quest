@@ -392,6 +392,7 @@ class SwinTransformer(nn.Module):
                     (window_size[0] // 2, window_size[1] // 2) if n_layer % 2 == 1 else None
                 )
                 stochastic_layer_dropout = stochastic_dropout * layer_counter / (sum_block_depths - 1)
+                layer_counter += 1
                 block = SwinBlock(
                     embedding_dim=embedding_dim,
                     num_heads=num_heads[idx_block],
