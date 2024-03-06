@@ -48,6 +48,7 @@ class MBConv(nn.Module):
                 in_channels=in_channels, out_channels=hidden_channels, kernel_size=1
             ),
             nn.BatchNorm2d(hidden_channels),
+            nn.GELU(),
             nn.Conv2d(
                 in_channels=hidden_channels,
                 out_channels=hidden_channels,
@@ -57,6 +58,7 @@ class MBConv(nn.Module):
                 groups=hidden_channels,
             ),
             nn.BatchNorm2d(hidden_channels),
+            nn.GELU(),
             SqueezeExcitation(
                 input_channels=hidden_channels,
                 squeeze_channels=squeeze_channels,
@@ -130,7 +132,7 @@ class RelativeAttention(nn.Module):
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]), indexing="ij")  # 2, Wh, Ww
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w], indexing="ij"))  # 2, Wh, Ww
         coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
         relative_coords = (
             coords_flatten[:, :, None] - coords_flatten[:, None, :]
