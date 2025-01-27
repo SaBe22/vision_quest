@@ -8,5 +8,3 @@ This repository provides a collection of simple and easy-to-use PyTorch implemen
 * **Swin Transformer (Swin)**: Swin transformer implementation based on ["Swin Transformer: Hierarchical Vision Transformer using Shifted Windows"](https://arxiv.org/abs/2103.14030)
 * **Multi-Axis ViT (MaxViT)**: MaxViT implementation based on ["MaxViT: Multi-Axis Vision Transformer"](https://arxiv.org/abs/2204.01697)
 * **CoAtNet**: CoAtNet implementation based on [CoAtNet: Marrying Convolution and Attention](https://arxiv.org/abs/2106.04803)
-
-Stay tuned for more! I'm constantly expanding my collection to include new and exciting vision models.
